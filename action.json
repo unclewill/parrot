@@ -1,0 +1,157 @@
+{
+ "actions":
+ [
+  {
+   "description": "Default Welcome Intent",
+   "name": "MAIN",
+   "fulfillment": { "conversationName": "convo" },
+   "intent": { "name": "actions.intent.MAIN" }
+  },
+  {
+   "description": "Schedule Query",
+   "name": "SCHEDULE_QUERY",
+   "fulfillment":
+   {
+    "conversationName": "convo" },
+    "intent":
+    {
+     "parameters": [ {"name": "when",    "type": "Whens"},
+                     {"name": "service", "type": "Services"},
+                     {"name": "route",   "type": "SchemaOrg_Number"},
+                     {"name": "stop",    "type": "SchemaOrg_Text"},
+                     {"name": "arrive",  "type": "Arrives"},
+                     {"name": "heading", "type": "Headings"}
+
+                   ],
+     "name": "www.whereismybus.xyz.intent.SCHEDULE_QUERY",
+     "trigger": { "queryPatterns":
+                  [ 
+                   "$Whens:when $Services:service $SchemaOrg_Number:route (bus)? ($Arrives:arrive)? AT $SchemaOrg_Text:stop ($Headings:heading)?",
+                   "$Whens:when $Services:service $SchemaOrg_Number:route (bus)? ($Arrives:arrive)?"
+                  ]
+                }
+    }
+   }
+  ],
+  "conversations":
+  {
+   "convo":
+   {
+    "name": "convo",
+    "url": "https://b7d082f7.ngrok.io"
+   }
+  },
+  "types": [
+  {
+   "name": "$Services",
+   "entities":
+   [
+    { "key": "B",   "synonyms": ["B"] },
+    { "key": "BX",  "synonyms": ["BX"] },
+    { "key": "M",   "synonyms": ["M"] },
+    { "key": "Q",   "synonyms": ["Q"] },
+    { "key": "S",   "synonyms": ["S"] },
+    { "key": "X",   "synonyms": ["X"] },
+    { "key": "BM",  "synonyms": ["BM"] },
+    { "key": "BXM", "synonyms": ["BXM"] },
+    { "key": "QM",  "synonyms": ["QM"] }
+   ]
+  },
+  {
+   "name": "$Headings",
+   "entities":
+   [
+    { "key": "north",     "synonyms": ["heading north",
+                                       "going north"] },
+    { "key": "northeast", "synonyms": ["heading northeast",
+                                       "going northeast",
+                                       "heading north east",
+                                       "going north east"] },
+    { "key": "east",      "synonyms": ["heading east",
+                                       "going east"] },
+    { "key": "southeast", "synonyms": ["heading southeast",
+                                       "going southeast",
+                                       "heading south east",
+                                       "going south east"] },
+    { "key": "south",     "synonyms": ["heading south",
+                                       "going south"] },
+    { "key": "southwest", "synonyms": ["heading southwest",
+                                       "going southwest",
+                                       "heading south west",
+                                       "going south west"] },
+    { "key": "west",      "synonyms": ["heading west",
+                                       "going west"] },
+    { "key": "northwest", "synonyms": ["heading northwest",
+                                       "going northwest",
+                                       "heading north west",
+                                       "going north west"] }
+   ]
+  },
+  {
+   "name": "$Headings",
+   "entities":
+   [
+    { "key": "heading", "synonyms": ["heading"] }
+   ]
+  },
+  {
+   "name": "$Whens",
+   "entities":
+   [
+    { "key": "when", "synonyms": ["when the next",
+                                  "when the",
+                                  "when a",
+                                  "when an",
+                                  "when does the next",
+                                  "when does the",
+                                  "when does a",
+                                  "when does an",
+                                  "when is the next",
+                                  "when is the",
+                                  "when is a",
+                                  "when is an",
+                                  "when will the next",
+                                  "when will the",
+                                  "when will a",
+                                  "when will an",
+                                  "at what time does the next",
+                                  "at what time does the",
+                                  "at what time does a",
+                                  "at what time does an",
+                                  "at what time is the next",
+                                  "at what time is the",
+                                  "at what time is a",
+                                  "at what time is an",
+                                  "at what time will the next",
+                                  "at what time will the",
+                                  "at what time will a",
+                                  "at what time will an"] }
+   ]
+  },
+  {
+   "name": "$Arrives",
+   "entities":
+   [
+    { "key": "arrive", "synonyms": ["arrive",
+                                    "arrives",
+                                    "arriving",
+                                    "be arriving",
+                                    "leave",
+                                    "leaves",
+                                    "leaving",
+                                    "be leaving",
+                                    "come",
+                                    "comes",
+                                    "coming",
+                                    "be coming",
+                                    "becoming",
+                                    "stop",
+                                    "stops",
+                                    "stopping",
+                                    "be stopping"] }
+   ]
+  }
+ ]
+}
+
+

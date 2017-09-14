@@ -5,56 +5,63 @@
    "description": "Default Welcome Intent",
    "name": "MAIN",
    "fulfillment": { "conversationName": "convo" },
-   "intent": { "name": "actions.intent.MAIN" }
+   "intent":
+   {
+    "name": "actions.intent.MAIN"
+   }
   },
   {
    "description": "Schedule Query",
    "name": "SCHEDULE_QUERY",
-   "fulfillment":
+   "fulfillment": { "conversationName": "convo" },
+   "intent":
    {
-    "conversationName": "convo" },
-    "intent":
-    {
-     "parameters": [ {"name": "when",    "type": "Whens"},
-                     {"name": "service", "type": "Services"},
-                     {"name": "route",   "type": "SchemaOrg_Number"},
-                     {"name": "stop",    "type": "SchemaOrg_Text"},
-                     {"name": "arrive",  "type": "Arrives"},
-                     {"name": "heading", "type": "Headings"}
-
-                   ],
-     "name": "www.whereismybus.xyz.intent.SCHEDULE_QUERY",
-     "trigger": { "queryPatterns":
-                  [ 
-                   "$Whens:when $Services:service $SchemaOrg_Number:route (bus)? ($Arrives:arrive)? AT $SchemaOrg_Text:stop ($Headings:heading)?",
-                   "$Whens:when $Services:service $SchemaOrg_Number:route (bus)? ($Arrives:arrive)?"
+    "name": "www.whereismybus.xyz.intent.SCHEDULE_QUERY",
+    "parameters": [ {"name": "when",        "type": "Whens"},
+                    {"name": "rest",        "type": "SchemaOrg_Text"},
+                    {"name": "service",     "type": "Services"},
+                    {"name": "route",       "type": "SchemaOrg_Number"},
+                    {"name": "stop",        "type": "SchemaOrg_Text"},
+                    {"name": "toward",      "type": "Towards"},
+                    {"name": "arrive",      "type": "Arrives"},
+                    {"name": "heading",     "type": "Headings"},
+                    {"name": "destination", "type": "SchemaOrg_Text"}
+                  ],
+    "trigger": { "queryPatterns":
+                  [
+                   "$Whens:when $Services:service $SchemaOrg_Number:route (select)? (bus)? $Arrives:arrive $SchemaOrg_Text:stop $Towards:toward $SchemaOrg_Text:destination",
+                   "$Whens:when $Services:service $SchemaOrg_Number:route (select)? (bus)? $Arrives:arrive $SchemaOrg_Text:stop $Headings:heading",
+                   "$Whens:when $Services:service $SchemaOrg_Number:route (select)? (bus)? $Arrives:arrive $SchemaOrg_Text:stop",
+                   "$Whens:when $Services:service $SchemaOrg_Number:route (select)? (bus)? $SchemaOrg_Text:rest"
                   ]
-                }
-    }
+               }
    }
-  ],
-  "conversations":
+  }
+ ],
+ "conversations":
+ {
+  "convo":
   {
-   "convo":
-   {
-    "name": "convo",
-    "url": "https://b7d082f7.ngrok.io"
-   }
-  },
-  "types": [
+   "name": "convo",
+   "url": "https://b4d8f033.ngrok.io",
+   "fulfillmentApiVersion": 2
+  }
+ },
+ "types":
+ [
   {
    "name": "$Services",
    "entities":
    [
-    { "key": "B",   "synonyms": ["B"] },
+    { "key": "BXM", "synonyms": ["BXM"] },
     { "key": "BX",  "synonyms": ["BX"] },
+    { "key": "BM",  "synonyms": ["BM"] },
+    { "key": "QM",  "synonyms": ["QM"] },
+    { "key": "B",   "synonyms": ["B"] },
     { "key": "M",   "synonyms": ["M"] },
     { "key": "Q",   "synonyms": ["Q"] },
     { "key": "S",   "synonyms": ["S"] },
-    { "key": "X",   "synonyms": ["X"] },
-    { "key": "BM",  "synonyms": ["BM"] },
-    { "key": "BXM", "synonyms": ["BXM"] },
-    { "key": "QM",  "synonyms": ["QM"] }
+    { "key": "X",   "synonyms": ["X"] }
    ]
   },
   {
@@ -88,10 +95,11 @@
    ]
   },
   {
-   "name": "$Headings",
+   "name": "$Towards",
    "entities":
    [
-    { "key": "heading", "synonyms": ["heading"] }
+    { "key": "toward", "synonyms": ["toward",
+                                    "going to"] }
    ]
   },
   {
@@ -132,26 +140,113 @@
    "name": "$Arrives",
    "entities":
    [
-    { "key": "arrive", "synonyms": ["arrive",
+    { "key": "arrive", "synonyms": ["arrive at",
+                                    "arrives at",
                                     "arrives",
+                                    "arrive",
+                                    "arriving at",
+                                    "be arriving at",
+                                    "will arrive at",
+
                                     "arriving",
                                     "be arriving",
-                                    "leave",
+                                    "will arrive",
+
+                                    "leave from",
+                                    "leaves from",
                                     "leaves",
+                                    "leave",
+                                    "leaving from",
+                                    "be leaving from",
+                                    "will leave from",
+
                                     "leaving",
                                     "be leaving",
-                                    "come",
+                                    "will leave",
+
+                                    "come to",
+                                    "comes to",
                                     "comes",
+                                    "coming to",
+                                    "be coming to",
+                                    "becoming to",
+
                                     "coming",
                                     "be coming",
-                                    "becoming",
-                                    "stop",
-                                    "stops",
-                                    "stopping",
-                                    "be stopping"] }
+                                    "will come",
+
+                                    "stop at",
+                                    "stops at",
+                                    "stopping at",
+                                    "be stopping at",
+                                    "will stop at",
+
+                                    "makes a stop at",
+                                    "making a stop at",
+                                    "be making a stop at",
+                                    "will make a stop at",
+
+                                    "depart from",
+                                    "departs from",
+                                    "departs",
+                                    "depart",
+                                    "departing from",
+                                    "be departing from",
+                                    "will depart from",
+
+                                    "departing",
+                                    "be departing",
+                                    "will depart"] }
+   ]
+  },
+  {
+   "name": "$Sorrys",
+   "entities":
+   [
+    { "key": "sorry", "synonyms": ["I'm sorry but",
+                                   "I am sorry but",
+                                   "sorry but",
+                                   "I apologize but",
+                                   "I'm sorry",
+                                   "I am sorry",
+                                   "sorry",
+                                   "I apologize"] }
+   ]
+  },
+  {
+   "name": "$Cans",
+   "entities":
+   [
+     { "key": "can", "synonyms": ["could you please",
+                                  "can you please",
+                                  "will you please",
+                                  "could you",
+                                  "can you",
+                                  "will you",
+                                  "please"] }
+     ]
+  },
+  {
+   "name": "$Repeats",
+   "entities":
+   [
+     { "key": "repeat", "synonyms": ["say again",
+                                     "say that again",
+                                     "repeat that",
+                                     "repeat it",
+                                     "repeat",
+                                     "come again",
+                                     "say what",
+                                     "what was that",
+                                     "what did you say",
+                                     "again",
+                                     "I didn't get that",
+                                     "I did not get that",
+                                     "I didn't hear you",
+                                     "I did not hear you",
+                                     "I didn't hear that",
+                                     "I did not hear that"] }
    ]
   }
  ]
 }
-
-

@@ -16,7 +16,7 @@
    "fulfillment": { "conversationName": "convo" },
    "intent":
    {
-    "name": "www.whereismybus.xyz.intent.SCHEDULE_QUERY",
+    "name": "your_domain_goes.here.SCHEDULE_QUERY",
     "parameters": [ {"name": "when",        "type": "Whens"},
                     {"name": "rest",        "type": "SchemaOrg_Text"},
                     {"name": "service",     "type": "Services"},
@@ -43,7 +43,7 @@
   "convo":
   {
    "name": "convo",
-   "url": "https://b4d8f033.ngrok.io",
+   "url": "https://f63aa19c.ngrok.io",
    "fulfillmentApiVersion": 2
   }
  },

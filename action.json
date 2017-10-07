@@ -16,7 +16,7 @@
    "fulfillment": { "conversationName": "convo" },
    "intent":
    {
-    "name": "your_domain_goes.here.SCHEDULE_QUERY",
+    "name": "your_domain_goes_here.SCHEDULE_QUERY",
     "parameters": [ {"name": "when",        "type": "Whens"},
                     {"name": "rest",        "type": "SchemaOrg_Text"},
                     {"name": "service",     "type": "Services"},

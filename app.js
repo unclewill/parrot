@@ -8,7 +8,7 @@ var express = require('express');
 var expressApp = express();
 var bodyParser = require('body-parser');
 var port = process.env.PORT || 8080;
-var SCHEDULE_QUERY = 'your_domain_goes.here.SCHEDULE_QUERY';
+var SCHEDULE_QUERY = 'your_domain_goes_here.SCHEDULE_QUERY';
 
 function handlePost(request, response)
 {

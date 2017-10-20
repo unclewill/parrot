@@ -1,0 +1,1 @@
+gactions update --action_package action.json --project <your project goes here>

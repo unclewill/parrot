@@ -33,7 +33,7 @@ function handlePost(request, response)
   app.ask('Polly want a cracker');
  }
 
- // Handles your custom query intent
+ // Handles the query intent - i.e. user has specified a route at minimum
 
  function queryIntent(app)
  {

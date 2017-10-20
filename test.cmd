@@ -1,1 +1,1 @@
-gactions test --action_package action.json --project <your project goes here>
+gactions test --action_package action.json --project parrot-ac1f3

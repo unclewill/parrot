@@ -1,0 +1,252 @@
+{
+ "actions":
+ [
+  {
+   "description": "Default Welcome Intent",
+   "name": "MAIN",
+   "fulfillment": { "conversationName": "convo" },
+   "intent":
+   {
+    "name": "actions.intent.MAIN"
+   }
+  },
+  {
+   "description": "Schedule Query",
+   "name": "SCHEDULE_QUERY",
+   "fulfillment": { "conversationName": "convo" },
+   "intent":
+   {
+    "name": "your_domain_goes_here.SCHEDULE_QUERY",
+    "parameters": [ {"name": "when",        "type": "Whens"},
+                    {"name": "rest",        "type": "SchemaOrg_Text"},
+                    {"name": "service",     "type": "Services"},
+                    {"name": "route",       "type": "SchemaOrg_Number"},
+                    {"name": "stop",        "type": "SchemaOrg_Text"},
+                    {"name": "toward",      "type": "Towards"},
+                    {"name": "arrive",      "type": "Arrives"},
+                    {"name": "heading",     "type": "Headings"},
+                    {"name": "destination", "type": "SchemaOrg_Text"}
+                  ],
+    "trigger": { "queryPatterns":
+                  [
+                   "$Whens:when $Services:service $SchemaOrg_Number:route (select)? (bus)? $Arrives:arrive $SchemaOrg_Text:stop $Towards:toward $SchemaOrg_Text:destination",
+                   "$Whens:when $Services:service $SchemaOrg_Number:route (select)? (bus)? $Arrives:arrive $SchemaOrg_Text:stop $Headings:heading",
+                   "$Whens:when $Services:service $SchemaOrg_Number:route (select)? (bus)? $Arrives:arrive $SchemaOrg_Text:stop",
+                   "$Whens:when $Services:service $SchemaOrg_Number:route (select)? (bus)? $SchemaOrg_Text:rest"
+                  ]
+               }
+   }
+  }
+ ],
+ "conversations":
+ {
+  "convo":
+  {
+   "name": "convo",
+   "url": "https://f63aa19c.ngrok.io",
+   "fulfillmentApiVersion": 2
+  }
+ },
+ "types":
+ [
+  {
+   "name": "$Services",
+   "entities":
+   [
+    { "key": "BXM", "synonyms": ["BXM"] },
+    { "key": "BX",  "synonyms": ["BX"] },
+    { "key": "BM",  "synonyms": ["BM"] },
+    { "key": "QM",  "synonyms": ["QM"] },
+    { "key": "B",   "synonyms": ["B"] },
+    { "key": "M",   "synonyms": ["M"] },
+    { "key": "Q",   "synonyms": ["Q"] },
+    { "key": "S",   "synonyms": ["S"] },
+    { "key": "X",   "synonyms": ["X"] }
+   ]
+  },
+  {
+   "name": "$Headings",
+   "entities":
+   [
+    { "key": "north",     "synonyms": ["heading north",
+                                       "going north"] },
+    { "key": "northeast", "synonyms": ["heading northeast",
+                                       "going northeast",
+                                       "heading north east",
+                                       "going north east"] },
+    { "key": "east",      "synonyms": ["heading east",
+                                       "going east"] },
+    { "key": "southeast", "synonyms": ["heading southeast",
+                                       "going southeast",
+                                       "heading south east",
+                                       "going south east"] },
+    { "key": "south",     "synonyms": ["heading south",
+                                       "going south"] },
+    { "key": "southwest", "synonyms": ["heading southwest",
+                                       "going southwest",
+                                       "heading south west",
+                                       "going south west"] },
+    { "key": "west",      "synonyms": ["heading west",
+                                       "going west"] },
+    { "key": "northwest", "synonyms": ["heading northwest",
+                                       "going northwest",
+                                       "heading north west",
+                                       "going north west"] }
+   ]
+  },
+  {
+   "name": "$Towards",
+   "entities":
+   [
+    { "key": "toward", "synonyms": ["toward",
+                                    "going to"] }
+   ]
+  },
+  {
+   "name": "$Whens",
+   "entities":
+   [
+    { "key": "when", "synonyms": ["when the next",
+                                  "when the",
+                                  "when a",
+                                  "when an",
+                                  "when does the next",
+                                  "when does the",
+                                  "when does a",
+                                  "when does an",
+                                  "when is the next",
+                                  "when is the",
+                                  "when is a",
+                                  "when is an",
+                                  "when will the next",
+                                  "when will the",
+                                  "when will a",
+                                  "when will an",
+                                  "at what time does the next",
+                                  "at what time does the",
+                                  "at what time does a",
+                                  "at what time does an",
+                                  "at what time is the next",
+                                  "at what time is the",
+                                  "at what time is a",
+                                  "at what time is an",
+                                  "at what time will the next",
+                                  "at what time will the",
+                                  "at what time will a",
+                                  "at what time will an"] }
+   ]
+  },
+  {
+   "name": "$Arrives",
+   "entities":
+   [
+    { "key": "arrive", "synonyms": ["arrive at",
+                                    "arrives at",
+                                    "arrives",
+                                    "arrive",
+                                    "arriving at",
+                                    "be arriving at",
+                                    "will arrive at",
+
+                                    "arriving",
+                                    "be arriving",
+                                    "will arrive",
+
+                                    "leave from",
+                                    "leaves from",
+                                    "leaves",
+                                    "leave",
+                                    "leaving from",
+                                    "be leaving from",
+                                    "will leave from",
+
+                                    "leaving",
+                                    "be leaving",
+                                    "will leave",
+
+                                    "come to",
+                                    "comes to",
+                                    "comes",
+                                    "coming to",
+                                    "be coming to",
+                                    "becoming to",
+
+                                    "coming",
+                                    "be coming",
+                                    "will come",
+
+                                    "stop at",
+                                    "stops at",
+                                    "stopping at",
+                                    "be stopping at",
+                                    "will stop at",
+
+                                    "makes a stop at",
+                                    "making a stop at",
+                                    "be making a stop at",
+                                    "will make a stop at",
+
+                                    "depart from",
+                                    "departs from",
+                                    "departs",
+                                    "depart",
+                                    "departing from",
+                                    "be departing from",
+                                    "will depart from",
+
+                                    "departing",
+                                    "be departing",
+                                    "will depart"] }
+   ]
+  },
+  {
+   "name": "$Sorrys",
+   "entities":
+   [
+    { "key": "sorry", "synonyms": ["I'm sorry but",
+                                   "I am sorry but",
+                                   "sorry but",
+                                   "I apologize but",
+                                   "I'm sorry",
+                                   "I am sorry",
+                                   "sorry",
+                                   "I apologize"] }
+   ]
+  },
+  {
+   "name": "$Cans",
+   "entities":
+   [
+     { "key": "can", "synonyms": ["could you please",
+                                  "can you please",
+                                  "will you please",
+                                  "could you",
+                                  "can you",
+                                  "will you",
+                                  "please"] }
+     ]
+  },
+  {
+   "name": "$Repeats",
+   "entities":
+   [
+     { "key": "repeat", "synonyms": ["say again",
+                                     "say that again",
+                                     "repeat that",
+                                     "repeat it",
+                                     "repeat",
+                                     "come again",
+                                     "say what",
+                                     "what was that",
+                                     "what did you say",
+                                     "again",
+                                     "I didn't get that",
+                                     "I did not get that",
+                                     "I didn't hear you",
+                                     "I did not hear you",
+                                     "I didn't hear that",
+                                     "I did not hear that"] }
+   ]
+  }
+ ]
+}
